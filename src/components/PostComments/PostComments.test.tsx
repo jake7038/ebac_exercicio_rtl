@@ -8,3 +8,24 @@ describe('Teste para o componente PostComment', () => {
         expect(screen.getByText('Comentar')).toBeInTheDocument();
     });
 });
+
+test('Deve inserir dois comentário', () => {
+
+    render(<PostComment/>)
+    fireEvent.change(screen.getByTestId('comentario'),{
+        target: {
+            value: 'maneiro'
+        }
+    })
+    fireEvent.click(screen.getByTestId('botao'))
+
+    fireEvent.change(screen.getByTestId('comentario'),{
+        target: {
+            value: 'gostei'
+        }
+    })
+    fireEvent.click(screen.getByTestId('botao'))
+
+    expect(screen.getByText('maneiro')).toBeInTheDocument();
+    expect(screen.getByText('gostei')).toBeInTheDocument();
+})
